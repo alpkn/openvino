@@ -406,6 +406,8 @@ int main(int argc, char* argv[]) {
 
             auto supported_properties = core.get_property(device, ov::supported_properties);
 
+            std::cout << "device " << device << "; core ov::optimal_number_of_infer_requests = " << core.get_property(device, ov::optimal_number_of_infer_requests, device_config) << std::endl;
+
             auto supported = [&](const std::string& key) {
                 return std::find(std::begin(supported_properties), std::end(supported_properties), key) !=
                        std::end(supported_properties);
@@ -819,6 +821,7 @@ int main(int argc, char* argv[]) {
         // ----------------- 8. Querying optimal runtime parameters
         // -----------------------------------------------------
         next_step();
+        std::cout << "compiledModel ov::optimal_number_of_infer_requests = " << compiledModel.get_property(ov::optimal_number_of_infer_requests) << std::endl;
 
         // output of the actual settings that the device selected
         auto supported_properties = compiledModel.get_property(ov::supported_properties);
